@@ -1,8 +1,9 @@
 #include "msp430g2553.h"
 #include "LCD_NOKIA_5110.h"
 #include "UART.h"
+#define SIZE_DATA_BUFFER 13
 
-char c;
+char c[SIZE_DATA_BUFFER];
 int i;
 
 unsigned char serialRead()
@@ -46,8 +47,8 @@ void main (void)
 WDTCTL = WDTPW + WDTHOLD;  //Stop Watchdog Timer 
 BCSCTL1 = CALBC1_1MHZ;
 DCOCTL = CALDCO_1MHZ;//chon thach anh dao dong noi la 1MHZ
-LCD5110_Init(50,0,4);
-
+LCD5110_Init(30,0,4);
+P1DIR |= BIT6;
 P1SEL = BIT1 + BIT2 ;                     // P1.1 = RXD, P1.2=TXD
 P1SEL2 = BIT1 + BIT2 ;                     // P1.1 = RXD, P1.2=TXD
 UCA0CTL1 |= UCSSEL_2;                     // SMCLK
@@ -58,19 +59,22 @@ UCA0CTL1 &= ~UCSWRST;                     // **Initialize USCI state machine**
 IE2 |= UCA0RXIE;                          // Enable USCI_A0 RX interrupt
 __bis_SR_register(GIE);  //cho phep ngat
 while(1){
-  __delay_cycles(100000);
+  if(i == 12){
+    __delay_cycles(1000);
     LCD5110_Clr();
     LCD5110_GotoXY(0,0);
-    LCD5110_Char(c);
+    LCD5110_String(c);
+    i = 0;
+  }
+    P1OUT ^= BIT6;
+    __delay_cycles(10000);
   }
 }
 //  Echo back RXed character, confirm TX buffer is ready first
 #pragma vector=USCIAB0RX_VECTOR
 __interrupt void USCI0RX_ISR(void)
 {
-  c = serialRead();
+  c[i] = serialRead();
   i++;
-  while (!(IFG2&UCA0TXIFG));                // USCI_A0 TX buffer ready?
-  UCA0TXBUF = c;                    // TX -> RXed character
   serialWrite_Int(i);
 }
