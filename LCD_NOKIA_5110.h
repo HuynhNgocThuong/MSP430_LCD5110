@@ -1,14 +1,3 @@
-////////////////////////////////////////////////////////////////////
-// THU VIEN DINH NGHIA CAC HAM XU LY LCD NOKIA 5110
-// VIET BOI : PHAM VAN THUAN	DTVT07-K55
-// Version : 1.0	14/10/2014
-// Email:	phthuanbk55@gmail.com
-// Blog :	http://thuanbk55.blogspot.com/
-// .................................................................
-// MSP430 LIBRARY
-//******************************************************************/
-
-
 
 #ifndef LCD_NOKIA_5110_
 #define LCD_NOKIA_5110_
@@ -100,7 +89,7 @@ static const char ASCII[][5] = {		// basic font
 	,{0x07, 0x08, 0x70, 0x08, 0x07} // 59 Y
 	,{0x61, 0x51, 0x49, 0x45, 0x43} // 5a Z
 	,{0x00, 0x7f, 0x41, 0x41, 0x00} // 5b [
-	,{0x02, 0x04, 0x08, 0x10, 0x20} // 5c ¥
+	,{0x02, 0x04, 0x08, 0x10, 0x20} // 5c Â¥
 	,{0x00, 0x41, 0x41, 0x7f, 0x00} // 5d ]
 	,{0x04, 0x02, 0x01, 0x02, 0x04} // 5e ^
 	,{0x40, 0x40, 0x40, 0x40, 0x40} // 5f _
