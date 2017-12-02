@@ -1,11 +1,3 @@
-////////////////////////////////////////////////////////////////////
-// THU VIEN DINH NGHIA CAC HAM XU LY UART
-// VIET BOI : PHAM VAN THUAN	DTVT07-K55
-// Email:	terran991992@gmail.com
-// Blog :	http://thuanbk55.blogspot.com/
-// .................................................................
-// AP DUNG CHO MACH UNG DUNG MSP430
-//******************************************************************/
 
 #ifndef UART_H_
 #define UART_H_
